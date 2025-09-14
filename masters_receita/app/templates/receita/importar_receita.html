@@ -1,0 +1,59 @@
+{% extends 'receita/index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Importar Receita da TheMealDB</h1>
+    <p>Pesquise por um prato (ex: "Arrabiata", "Beef Wellington") e importe a receita para seu banco de dados.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="search">Nome do Prato:</label>
+            <input type="text" class="form-control" id="search" name="search" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2 mb-4">Pesquisar e Importar</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <hr>
+
+    <div class="sugestoes">
+        <h3>Ou importe um destes pratos populares:</h3>
+        <div class="d-flex flex-column gap-3 align-items-start">
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Arrabiata">
+                <button type="submit" class="btn btn-link text-secondary p-0">Arrabiata</button>
+            </form>
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Carbonara">
+                <button type="submit" class="btn btn-link text-secondary p-0">Carbonara</button>
+            </form>
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Sushi">
+                <button type="submit" class="btn btn-link text-secondary p-0">Sushi</button>
+            </form>
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Pancakes">
+                <button type="submit" class="btn btn-link text-secondary p-0">Pancakes</button>
+            </form>
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Lasagne">
+                <button type="submit" class="btn btn-link text-secondary p-0">Lasagne</button>
+            </form>
+            <form method="POST" class="m-0">
+                {% csrf_token %}
+                <input type="hidden" name="search" value="Chicken Curry">
+                <button type="submit" class="btn btn-link text-secondary p-0">Chicken Curry</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

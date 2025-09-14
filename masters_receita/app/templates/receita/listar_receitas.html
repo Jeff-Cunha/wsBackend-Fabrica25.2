@@ -1,0 +1,14 @@
+{% extends 'receita/index.html' %}
+
+{% block content %}
+<h1>Minhas Receitas</h1>
+<div class="list-group">
+    {% for receita in receitas %}
+        <a href="{% url 'detalhe_receita' receita.pk %}" class="list-group-item list-group-item-action">
+            {{ receita.nome_receita }}
+        </a>
+    {% empty %}
+        <p>Nenhuma receita cadastrada ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'receita/index.html' %}
+
+{% block content %}
+<h1>Apagar Receita</h1>
+<p>Você tem certeza que deseja apagar a receita "{{ receita.nome_receita }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, apagar</button>
+    <a href="{% url 'detalhe_receita' receita.pk %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

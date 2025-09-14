@@ -1,0 +1,20 @@
+{% extends 'receita/index.html' %}
+
+{% block content %}
+<h1>{{ receita.nome_receita }}</h1>
+<p><strong>Tempo de Preparo:</strong> {{ receita.tempo_preparo }} minutos</p>
+
+<h5>Ingredientes:</h5>
+<ul>
+    {% for ingrediente in receita.ingredientes.all %}
+        <li>{{ ingrediente.nome }}</li>
+    {% endfor %}
+</ul>
+
+<h5>Instruções:</h5>
+<p>{{ receita.passos|linebreaks }}</p>
+
+<a href="{% url 'editar_receita' receita.pk %}" class="btn btn-primary">Editar</a>
+<a href="{% url 'deletar_receita' receita.pk %}" class="btn btn-danger">Apagar</a>
+<a href="{% url 'listar_receitas' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

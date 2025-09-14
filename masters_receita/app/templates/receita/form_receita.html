@@ -1,0 +1,34 @@
+{% extends 'receita/index.html' %}
+
+{% block content %}
+<h1>{% if receita %}Editar Receita{% else %}Nova Receita{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="nome_receita">Nome da Receita</label>
+        <input type="text" class="form-control" id="nome_receita" name="nome_receita" value="{{ receita.nome_receita|default:'' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="tempo_preparo">Tempo de Preparo (minutos)</label>
+        <input type="number" class="form-control" id="tempo_preparo" name="tempo_preparo" value="{{ receita.tempo_preparo|default:'' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="passos">Instruções</label>
+        <textarea class="form-control" id="passos" name="passos" rows="10" required>{{ receita.passos|default:'' }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="ingredientes">Ingredientes</label>
+        <select multiple class="form-control" id="ingredientes" name="ingredientes">
+            {% for ingrediente in ingredientes %}
+                <option value="{{ ingrediente.pk }}" {% if receita and ingrediente in receita.ingredientes.all %}selected{% endif %}>
+                    {{ ingrediente.nome }}
+                </option>
+            {% endfor %}
+        </select>
+        <small class="form-text text-muted">Segure Ctrl (ou Cmd) para selecionar mais de um.</small>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>
+{% endblock %}
