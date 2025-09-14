@@ -1,7 +1,6 @@
 import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Receitas, Ingrediente
-from django.views import View
 
 # Create your views here.
 #CREATE
